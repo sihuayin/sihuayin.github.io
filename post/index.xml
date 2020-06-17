@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sihuayin</title>
-    <link>http://sihuayin.github.io/</link>
-    <description>Recent content on Sihuayin</description>
+    <title>Posts on Sihuayin</title>
+    <link>http://sihuayin.github.io/post/</link>
+    <description>Recent content in Posts on Sihuayin</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Tue, 16 Jun 2020 21:47:08 +0800</lastBuildDate>
     
-	<atom:link href="http://sihuayin.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://sihuayin.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
