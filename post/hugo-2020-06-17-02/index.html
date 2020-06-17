@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>使用phaser3开发游戏02 &middot; Sihuayin</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="Sihuayin" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">Sihuayin</h2>
+				</a>
+				<ul>
+    
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span></span>
+        
+        <br>
+        <span>&nbsp;</span><time datetime="2020-06-16 21:47:08 &#43;0800 CST"></time>
+</div>
+		<h1 class="post-title">使用phaser3开发游戏02</h1>
+<div class="post-line"></div>
+
+		
+
+		
+
+<h2 id="主角登场">主角登场</h2>
+
+<h3 id="更改场景">更改场景</h3>
+
+<p>用编辑器或者ide打开my_first_game文件夹. 在 src/scenes 目录下面，创建一个新的文件 命名为 GameScene.js</p>
+
+<pre><code class="language-js">
+import Phaser from 'phaser'
+
+export default class GameScene extends Phaser.Scene {
+  constructor () {
+    super('game-scene')
+  }
+  preload () {
+  }
+
+  create () {}
+
+  update () {}
+}
+</code></pre>
+
+<p>删除 src/scenes 目录下的HelloWorldScene.js , 在mian.js 文件中 用GameScene 替换所有目录下的HelloWorldScene。这样就完成我们自己的场景定义。只不过，现在场景中什么都没有。</p>
+
+<p>简单解释一下 GameScene.js。 GameScene类继承自Phaser.Scene 那么在构造函数中一定要调用 super(myname)。 myname是这个scene的名称，在场景切换中有用。preload(), create(), and update() 是scene生命周期函数，preload 在进入场景前要加载的资源，create() 是场景启动的开始函数，update() 是刷新频率函数。</p>
+
+<h3 id="加载资源">加载资源</h3>
+
+<p>我们的主角是它：
+<img src="/images/posts/02/dude.png" alt="dude" /></p>
+
+<p>我们项目中的资源文件应该放在跟src同级的public目录下，所以在根目录新建文件夹，命名为public。 在public目录下在创建一个目录，命名为assets。 然后把dude图片下载下来，保存在assets中。</p>
+
+<p>资源文件放置在正确的目录后。打开程序到GameScene.js文件。在preload函数中添加一个语句：</p>
+
+<pre><code class="language-js">
+this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48})
+
+</code></pre>
+
+<p>这个资源文件是个角色不同状态的一个拼接图，而每个角色状态下，大小应该是 (width: 288 /9, height: 48),如此切割可以把原图片均匀的分成9份，以便组合不同的动作状态。</p>
+
+<h3 id="显示玩家">显示玩家</h3>
+
+<p>打开GameScene.js文件， 在create函数中添加：</p>
+
+<pre><code class="language-js">
+this.player = this.physics.add.sprite(100, 100, 'dude') // 具有重力特性的Sprite
+this.player.setBounce(0.2); // 物理反弹系数
+this.player.setCollideWorldBounds(true); // 接触到边界后，会被反弹。
+
+</code></pre>
+
+<p>此时玩家的朝向是左，也就是 dude.png 中第一个状态下的图片样子</p>
+
+<h3 id="添加动画">添加动画</h3>
+
+<p>从图片中可以看出， 主句有三个动作： 静止，向左走，向右走.那么我们就可以定义三种动画效果</p>
+
+<pre><code class="language-js">
+this.anims.create({
+  key: 'idle',
+  frames: this.anims.generateFrameNumbers('dude', {
+    frames: [4]
+  }),
+  yoyo: true,
+  repeat: -1
+})
+
+this.anims.create({
+  key: 'left',
+  frameRate: 6,
+  frames: this.anims.generateFrameNumbers('dude', {
+    start: 0,
+    end: 3
+  }),
+  yoyo: true,
+  repeat: 10
+})
+
+this.anims.create({
+  key: 'left',
+  frameRate: 6,
+  frames: this.anims.generateFrameNumbers('dude', {
+    start: 5,
+    end: 8
+  }),
+  yoyo: true,
+  repeat: -1
+})
+</code></pre>
+
+<blockquote>
+<p>key: 动画名称，切换时候使用
+frameRate: 频率，值越大，动画播放的速度越快
+frames: 播放动画的图片切片。这里有9个切片(0-8)
+yoyo: 是否反复
+repeat: 播放一次后是否重复，大于1的话 表示重复次数。</p>
+</blockquote>
+
+<p>如此就定义好了三种动画。现在是时候把脸的朝向调转过来了。</p>
+
+<pre><code class="language-js">
+this.player.anims.play('idle')
+
+</code></pre>
+
+<p><img src="/images/posts/02/player.png" alt="" /></p>
+
+<h3 id="动起来">动起来</h3>
+
+<p>接下来，我们要通过键盘按键让角色动起来。</p>
+
+<p>打开 GameScene.js 到create函数中 添加</p>
+
+<pre><code class="language-js">
+...
+this.cursors = this.input.keyboard.createCursorKeys();
+
+</code></pre>
+
+<p>接着 在 update 函数中添加代码，这个update函数触发频率很高，基本可认为是实时监测按键等状态。判断那个键是否被按下，可以如此：</p>
+
+<pre><code class="language-js">
+this.cursors.left.isDown // left, right, up, down, sapce, x 等
+
+</code></pre>
+
+<p>update函数修改为:</p>
+
+<pre><code class="language-js">update () {
+  if (this.cursors.left.isDown)
+  {
+    this.player.anims.play('left', true);
+  }
+  else if (this.cursors.right.isDown)
+  {
+    this.player.anims.play('right', true)
+  } else {
+    this.player.anims.play('idle')
+  }
+}
+</code></pre>
+
+<p>此时,只能控制玩家转向和播放对应的动画， 无法移动。添加移动 需要设置玩家的速度：</p>
+
+<pre><code class="language-js">
+this.player.setVelocityX(-160);  // x(横轴)方向 -160的速度 (负数就是向左， 0是静止)
+
+</code></pre>
+
+<p>如此可以修改update代码：</p>
+
+<pre><code class="language-js">update () {
+  if (this.cursors.left.isDown)
+  {
+    this.player.anims.play('left', true);
+    this.player.setVelocityX(-160);
+  }
+  else if (this.cursors.right.isDown)
+  {
+    this.player.anims.play('right', true)
+    this.player.setVelocityX(160);
+  } else {
+    this.player.anims.play('idle')
+    this.player.setVelocityX(0);
+  }
+}
+</code></pre>
+
+<p>目前的玩家可以在场景中走来走去，碰到边界也无法穿越。</p>
+
+
+		
+	</div>
+
+	
+		<div id="git-comments"></div>
+		<script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css"/>
+		<script>
+			var gitment = new Gitment({
+				id: 'hugo-2020-06-17-02',  
+				owner: '1317830',
+				repo: 'sihuayin',
+				oauth: {
+					client_id: '34df0e9c2b766c43aedb',
+					client_secret: 'ddaacfa3ba4dab1bd43c65b1313e87661f16fd09',
+				}
+			})
+			gitment.render('git-comments')
+		</script>
+		
+
+	<div class="pagination">
+		<a href="/post/hugo-2020-06-17-01/" class="left arrow">&#8592;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			<span>
+			&copy; <time datetime="2020-06-17 22:37:37.6497 &#43;0800 CST m=&#43;0.173268603">2020</time> . 
+			</span>
+		</footer>
+
+    </body>
+</html>

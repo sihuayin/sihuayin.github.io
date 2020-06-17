@@ -12,20 +12,20 @@
     
     <item>
       <title>使用phaser3开发游戏02</title>
-      <link>http://sihuayin.github.io/post/hugo-integrated-gitment-plugin/</link>
+      <link>http://sihuayin.github.io/post/hugo-2020-06-17-02/</link>
       <pubDate>Tue, 16 Jun 2020 21:47:08 +0800</pubDate>
       
-      <guid>http://sihuayin.github.io/post/hugo-integrated-gitment-plugin/</guid>
+      <guid>http://sihuayin.github.io/post/hugo-2020-06-17-02/</guid>
       <description>主角登场 更改场景 用编辑器或者ide打开my_first_game文件夹. 在 src/scenes 目录下面，创建一个新的文件 命名为 GameScene.js
 import Phaser from &#39;phaser&#39; export default class GameScene extends Phaser.Scene { constructor () { super(&#39;game-scene&#39;) } preload () { } create () {} update () {} }  删除 src/scenes 目录下的HelloWorldScene.</description>
     </item>
     
     <item>
       <title>使用phaser3开发游戏01</title>
-      <link>http://sihuayin.github.io/post/hugo-integrated-gitment-plugin/</link>
+      <link>http://sihuayin.github.io/post/hugo-2020-06-17-01/</link>
       <pubDate>Wed, 09 Oct 2019 21:47:08 +0800</pubDate>
       
-      <guid>http://sihuayin.github.io/post/hugo-integrated-gitment-plugin/</guid>
+      <guid>http://sihuayin.github.io/post/hugo-2020-06-17-01/</guid>
       <description>准备 什么是phaser3? 请移步，到官网查看一下. phaser html5游戏框架
 node, nvm , npm 由于node的多版本并存，和比较快的更新版本速度，我们本地环境最好能支持多个版本，能方便切换当前使用版本。那么可以选择安装nvm。
 mac：

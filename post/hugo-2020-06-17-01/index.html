@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>使用phaser3开发游戏01 &middot; Sihuayin</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="Sihuayin" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">Sihuayin</h2>
+				</a>
+				<ul>
+    
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span></span>
+        
+        <br>
+        <span>&nbsp;</span><time datetime="2019-10-09 21:47:08 &#43;0800 CST"></time>
+</div>
+		<h1 class="post-title">使用phaser3开发游戏01</h1>
+<div class="post-line"></div>
+
+		
+
+		
+
+<h2 id="准备">准备</h2>
+
+<h3 id="什么是phaser3">什么是phaser3?</h3>
+
+<p>请移步，到官网查看一下. <a href="https://phaser.io/">phaser html5游戏框架</a></p>
+
+<h3 id="node-nvm-npm">node, nvm , npm</h3>
+
+<p>由于node的多版本并存，和比较快的更新版本速度，我们本地环境最好能支持多个版本，能方便切换当前使用版本。那么可以选择安装nvm。</p>
+
+<p>mac：</p>
+
+<pre><code class="language-js">
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+
+</code></pre>
+
+<p>linux:</p>
+
+<pre><code class="language-js">
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+
+</code></pre>
+
+<p>window:</p>
+
+<p>使用安装包来安装<a href="https://github.com/coreybutler/nvm-windows">nvm-window</a></p>
+
+<p>检查nvm是否安装正确</p>
+
+<pre><code class="language-js">
+nvm --version  // window: nvm version
+
+</code></pre>
+
+<p>安装node</p>
+
+<pre><code class="language-js">
+nvm install node
+nvm use node
+
+</code></pre>
+
+<p>查看和检查安装</p>
+
+<pre><code class="language-js">
+node --version
+npm --version
+
+</code></pre>
+
+<h3 id="服务器">服务器</h3>
+
+<p>虽然html5的游戏是浏览器端程序，但是加载图片，音频等资源时候，需要一台静态资源服务器支持。 phaser网站也给出了几种简单的方案。在这里 我没使用 <a href="https://parceljs.org/">parcel</a>: 快速，零配置的Web应用程序捆绑包。跟webpack等很类似，大家可以使用以后做一个比较。它可以给我提供一个测试使用的简单服务器。</p>
+
+<pre><code class="language-js">
+npm install -g parcel-bundler
+parcel --version
+
+</code></pre>
+
+<h3 id="初始化项目">初始化项目</h3>
+
+<p>通过 <a href="https://github.com/ourcade/phaser3-parcel-template">模板项目</a> 来初始化我们的游戏. 进入到我们的游戏项目的根目录执行克隆</p>
+
+<pre><code class="language-js">
+git clone https://github.com/ourcade/phaser3-parcel-template my_first_game //项目名
+cd my_first_game
+npm install
+
+</code></pre>
+
+<h3 id="启动server-查看效果">启动server，查看效果</h3>
+
+<pre><code class="language-js">
+npm run start
+
+</code></pre>
+
+<p>打开浏览器，输入 <a href="http://localhost:8000">http://localhost:8000</a>, 初始工作完成。</p>
+
+<p><img src="/images/posts/01/demo.jpg" alt="" /></p>
+
+
+		
+	</div>
+
+	
+		<div id="git-comments"></div>
+		<script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css"/>
+		<script>
+			var gitment = new Gitment({
+				id: 'hugo-2020-06-17-01',  
+				owner: '1317830',
+				repo: 'sihuayin',
+				oauth: {
+					client_id: '34df0e9c2b766c43aedb',
+					client_secret: 'ddaacfa3ba4dab1bd43c65b1313e87661f16fd09',
+				}
+			})
+			gitment.render('git-comments')
+		</script>
+		
+
+	<div class="pagination">
+		<a href="/post/hugo-2020-06-17-02/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			<span>
+			&copy; <time datetime="2020-06-17 22:37:37.652487 &#43;0800 CST m=&#43;0.176055296">2020</time> . 
+			</span>
+		</footer>
+
+    </body>
+</html>
