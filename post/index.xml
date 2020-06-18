@@ -5,10 +5,22 @@
     <link>http://sihuayin.github.io/post/</link>
     <description>Recent content in Posts on Sihuayin</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 16 Jun 2020 21:47:08 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2020 21:47:08 +0800</lastBuildDate>
     
 	<atom:link href="http://sihuayin.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>使用phaser3开发游戏03</title>
+      <link>http://sihuayin.github.io/post/hugo-2020-06-18-01/</link>
+      <pubDate>Wed, 17 Jun 2020 21:47:08 +0800</pubDate>
+      
+      <guid>http://sihuayin.github.io/post/hugo-2020-06-18-01/</guid>
+      <description>背景和障碍物 添加背景 使用的背景图片是: 图片下载到资源目录后, 在GameScene.js文件中的preload函数中，预加载图片：
+this.load.image(&#39;sky&#39;, &#39;assets/sky.png&#39;);  接着在 create 函数中，给图片添加到场景中
+this.add.image(400, 300, &#39;sky&#39;) ...  *** 在create函数开始的时候添加最底层的图片精灵，默认情况下后添加的精灵会在最上层。
+跳跃 目前的主角还不能跳跃。我们使用小键盘的 上 来控制主角跳跃:</description>
+    </item>
     
     <item>
       <title>使用phaser3开发游戏02</title>
