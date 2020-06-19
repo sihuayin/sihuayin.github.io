@@ -44,6 +44,22 @@
 
 	<div class="catalogue">
 		
+			<a href="http://sihuayin.github.io/post/hugo-2020-06-19-01/" class="catalogue-item">
+    <div>
+        <time datetime="2020-06-18 21:47:08 &#43;0800 CST" class="catalogue-time"></time>
+        <h1 class="catalogue-title">使用phaser3开发游戏04</h1>
+        <div class="catalogue-line"></div>
+
+        <p>
+            添加小星星 目前玩家可以在场景里面，跑跑跳跳。现在我们给它添加一些星星，让他去收集。
+把图片放置在项目资源文件夹里面。打开GameScene.js 在preolad函数中，预加载这个星星的图片资源：
+this.load.image('star', 'assets/star.png')  由于要创建多个星星精灵，所用使用 this.physics.add.group来一次性添加多个, 新创建一个函数:
+// createStars() { const stars = this.physics.add.group({ key: 'star', repeat: 11, setXY: { x: 12, y: 0, stepX: 70 } }) return stars }  在 create函数中添加调用
+        </p>
+    </div>
+</a>
+
+		
 			<a href="http://sihuayin.github.io/post/hugo-2020-06-18-01/" class="catalogue-item">
     <div>
         <time datetime="2020-06-17 21:47:08 &#43;0800 CST" class="catalogue-time"></time>
@@ -104,7 +120,7 @@ wget -qO- https://raw.
 
         		<footer>
 			<span>
-			&copy; <time datetime="2020-06-18 17:52:37.664079 &#43;0800 CST m=&#43;0.102274153">2020</time> . 
+			&copy; <time datetime="2020-06-19 16:21:01.42851 &#43;0800 CST m=&#43;0.129003256">2020</time> . 
 			</span>
 		</footer>
 

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>使用phaser3开发游戏04 &middot; Sihuayin</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/monokai.min.css" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="Sihuayin" />
+	</head>
+
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">Sihuayin</h2>
+				</a>
+				<ul>
+    
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span></span>
+        
+        <br>
+        <span>&nbsp;</span><time datetime="2020-06-18 21:47:08 &#43;0800 CST"></time>
+</div>
+		<h1 class="post-title">使用phaser3开发游戏04</h1>
+<div class="post-line"></div>
+
+		
+
+		
+
+<h3 id="添加小星星">添加小星星</h3>
+
+<p>目前玩家可以在场景里面，跑跑跳跳。现在我们给它添加一些星星，让他去收集。</p>
+
+<p><img src="/images/posts/04/star.png" alt="" /></p>
+
+<p>把图片放置在项目资源文件夹里面。打开GameScene.js 在preolad函数中，预加载这个星星的图片资源：</p>
+
+<pre><code class="language-js">
+this.load.image('star', 'assets/star.png')
+
+</code></pre>
+
+<p>由于要创建多个星星精灵，所用使用 this.physics.add.group来一次性添加多个, 新创建一个函数:</p>
+
+<pre><code class="language-js">
+//
+
+createStars() {
+  const stars = this.physics.add.group({
+    key: 'star',
+    repeat: 11,
+    setXY: { x: 12, y: 0, stepX: 70 }
+  })
+  return stars
+}
+
+</code></pre>
+
+<p>在 create函数中添加调用</p>
+
+<pre><code class="language-js">
+const stars = this.createStars()
+this.physics.add.collider(stars, this.platforms) // 跟障碍物之间添加物理碰撞
+
+</code></pre>
+
+<p><img src="/images/posts/04/01.png" alt="" /></p>
+
+<h3 id="收集">收集</h3>
+
+<p>让玩家可以收集 (接触)星星。需要给星星和玩家添加碰撞事件, 在create函数中添加：</p>
+
+<pre><code class="language-js">
+this.physics.add.overlap(this.player, stars, this.collectStar, null, this)
+// this.collectStar 是碰撞回调函数
+
+</code></pre>
+
+<p>碰撞以后，需要把星星删除掉，以便表示玩家已经收集到了此星星, 新添加碰撞回调函数collectStar</p>
+
+<pre><code class="language-js">
+collectStar(player, star) { // player 是碰撞绑定中的第一个参数，star是第二个
+  star.disableBody(true, true) // 删除body既可在画面中消失
+}
+
+</code></pre>
+
+<h3 id="得分">得分</h3>
+
+<p>目前来说还不错，但需要显示已经采集了数量。我们简单的封装一下phaser的text类来实现。
+在src目录下创建一个ui目录。在ui目录下新建文件ScoreLabel.js</p>
+
+<p>src/ui/ScoreLabel.js</p>
+
+<pre><code class="language-js">
+import Phaser from 'phaser'
+
+const formatScore = (score) =&gt; `Score: ${score}`
+
+export default class ScoreLabel extends Phaser.GameObjects.Text
+{
+	constructor(scene, x, y, score, style)
+	{
+		super(scene, x, y, formatScore(score), style)
+
+		this.score = score
+	}
+
+	setScore(score)
+	{
+		this.score  = score
+		this.updateScoreText()
+	}
+
+	add(points)
+	{
+		this.setScore(this.score + points)
+	}
+
+	updateScoreText()
+	{
+		this.setText(formatScore(this.score))
+	}
+}
+
+</code></pre>
+
+<p>回到 GameScene，</p>
+
+<pre><code class="language-js">
+import Phaser from 'phaser'
+import ScoreLabel from '../ui/ScoreLabel'
+
+</code></pre>
+
+<p>修改create函数:</p>
+
+<pre><code class="language-js">
+const style = { fontSize: '32px', fill: '#000' }
+this.scoreLabel = new ScoreLabel(this, 16, 16, 0, style)
+
+this.add.existing(this.scoreLabel)
+
+
+</code></pre>
+
+<p>接下来修改 碰撞到星星的回调函数， 这里每次每次碰到星星都让得分加10</p>
+
+<pre><code class="language-js">
+collectStar(player, star) { // player 是碰撞绑定中的第一个参数，star是第二个
+  star.disableBody(true, true) // 删除body既可在画面中消失
+  this.scoreLabel.add(10)
+}
+
+</code></pre>
+
+<p><img src="/images/posts/04/02.png" alt="" /></p>
+
+
+		
+	</div>
+
+	
+		<div id="git-comments"></div>
+		<script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css"/>
+		<script>
+			var gitment = new Gitment({
+				id: 'hugo-2020-06-19-01',  
+				owner: 'sihuayin',
+				repo: 'sihuayin.github.io',
+				oauth: {
+					client_id: '34df0e9c2b766c43aedb',
+					client_secret: 'ddaacfa3ba4dab1bd43c65b1313e87661f16fd09',
+				}
+			})
+			gitment.render('git-comments')
+		</script>
+		
+
+	<div class="pagination">
+		<a href="/post/hugo-2020-06-18-01/" class="left arrow">&#8592;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			<span>
+			&copy; <time datetime="2020-06-19 16:21:01.430504 &#43;0800 CST m=&#43;0.130996763">2020</time> . 
+			</span>
+		</footer>
+
+    </body>
+</html>
