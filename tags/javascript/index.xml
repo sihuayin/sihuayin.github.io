@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>javascript on Sihuayin</title>
+    <link>http://sihuayin.github.io/tags/javascript/</link>
+    <description>Recent content in javascript on Sihuayin</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 02 Aug 2020 10:47:08 +0800</lastBuildDate>
+    
+	<atom:link href="http://sihuayin.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>javascript 中间件的简单实现</title>
+      <link>http://sihuayin.github.io/post/javascript-2020-00-02-01/</link>
+      <pubDate>Sun, 02 Aug 2020 10:47:08 +0800</pubDate>
+      
+      <guid>http://sihuayin.github.io/post/javascript-2020-00-02-01/</guid>
+      <description>javascript 中间件的简单实现 正确地使用中间件， 可以在http请求事务中，剥离一些通用处理，简化处理函数的逻辑。比如认证验证，权限处理，记录日志，统一的响应格式等。
+如图： 整个中间件在http事务中执行的过程：有序的进入和离开，就像压栈和弹栈。
+有序排列的三个函数，要依次通过中间件执行：
+var fun1 = () =&amp;gt; { console.log(1) } var fun2 = () =&amp;gt; { console.</description>
+    </item>
+    
+  </channel>
+</rss>

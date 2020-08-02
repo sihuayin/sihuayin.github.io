@@ -1,14 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sihuayin</title>
     <link>http://sihuayin.github.io/</link>
     <description>Recent content on Sihuayin</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 18 Jun 2020 21:47:08 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2020 10:47:08 +0800</lastBuildDate>
     
-	<atom:link href="http://sihuayin.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="http://sihuayin.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>javascript 中间件的简单实现</title>
+      <link>http://sihuayin.github.io/post/javascript-2020-00-02-01/</link>
+      <pubDate>Sun, 02 Aug 2020 10:47:08 +0800</pubDate>
+      
+      <guid>http://sihuayin.github.io/post/javascript-2020-00-02-01/</guid>
+      
+        <description>javascript 中间件的简单实现 正确地使用中间件， 可以在http请求事务中，剥离一些通用处理，简化处理函数的逻辑。比如认证验证，权限处理，记录日志，统一的响应格式等。
+如图： 整个中间件在http事务中执行的过程：有序的进入和离开，就像压栈和弹栈。
+有序排列的三个函数，要依次通过中间件执行：
+var fun1 = () =&amp;gt; { console.log(1) } var fun2 = () =&amp;gt; { console.</description>
+      
+    </item>
     
     <item>
       <title>使用phaser3开发游戏04</title>
@@ -16,10 +30,12 @@
       <pubDate>Thu, 18 Jun 2020 21:47:08 +0800</pubDate>
       
       <guid>http://sihuayin.github.io/post/hugo-2020-06-19-01/</guid>
-      <description>添加小星星 目前玩家可以在场景里面，跑跑跳跳。现在我们给它添加一些星星，让他去收集。
+      
+        <description>添加小星星 目前玩家可以在场景里面，跑跑跳跳。现在我们给它添加一些星星，让他去收集。
 把图片放置在项目资源文件夹里面。打开GameScene.js 在preolad函数中，预加载这个星星的图片资源：
 this.load.image(&#39;star&#39;, &#39;assets/star.png&#39;)  由于要创建多个星星精灵，所用使用 this.physics.add.group来一次性添加多个, 新创建一个函数:
 // createStars() { const stars = this.physics.add.group({ key: &#39;star&#39;, repeat: 11, setXY: { x: 12, y: 0, stepX: 70 } }) return stars }  在 create函数中添加调用</description>
+      
     </item>
     
     <item>
@@ -28,10 +44,12 @@ this.load.image(&#39;star&#39;, &#39;assets/star.png&#39;)  由于要创建多�
       <pubDate>Wed, 17 Jun 2020 21:47:08 +0800</pubDate>
       
       <guid>http://sihuayin.github.io/post/hugo-2020-06-18-01/</guid>
-      <description>背景和障碍物 添加背景 使用的背景图片是: 图片下载到资源目录后, 在GameScene.js文件中的preload函数中，预加载图片：
+      
+        <description>背景和障碍物 添加背景 使用的背景图片是: 图片下载到资源目录后, 在GameScene.js文件中的preload函数中，预加载图片：
 this.load.image(&#39;sky&#39;, &#39;assets/sky.png&#39;);  接着在 create 函数中，给图片添加到场景中
 this.add.image(400, 300, &#39;sky&#39;) ...  *** 在create函数开始的时候添加最底层的图片精灵，默认情况下后添加的精灵会在最上层。
 跳跃 目前的主角还不能跳跃。我们使用小键盘的 上 来控制主角跳跃:</description>
+      
     </item>
     
     <item>
@@ -40,8 +58,10 @@ this.add.image(400, 300, &#39;sky&#39;) ...  *** 在create函数开始的时候�
       <pubDate>Tue, 16 Jun 2020 21:47:08 +0800</pubDate>
       
       <guid>http://sihuayin.github.io/post/hugo-2020-06-17-02/</guid>
-      <description>主角登场 更改场景 用编辑器或者ide打开my_first_game文件夹. 在 src/scenes 目录下面，创建一个新的文件 命名为 GameScene.js
+      
+        <description>主角登场 更改场景 用编辑器或者ide打开my_first_game文件夹. 在 src/scenes 目录下面，创建一个新的文件 命名为 GameScene.js
 import Phaser from &#39;phaser&#39; export default class GameScene extends Phaser.Scene { constructor () { super(&#39;game-scene&#39;) } preload () { } create () {} update () {} }  删除 src/scenes 目录下的HelloWorldScene.</description>
+      
     </item>
     
     <item>
@@ -50,11 +70,13 @@ import Phaser from &#39;phaser&#39; export default class GameScene extends Phase
       <pubDate>Wed, 09 Oct 2019 21:47:08 +0800</pubDate>
       
       <guid>http://sihuayin.github.io/post/hugo-2020-06-17-01/</guid>
-      <description>准备 什么是phaser3? 请移步，到官网查看一下. phaser html5游戏框架
+      
+        <description>准备 什么是phaser3? 请移步，到官网查看一下. phaser html5游戏框架
 node, nvm , npm 由于node的多版本并存，和比较快的更新版本速度，我们本地环境最好能支持多个版本，能方便切换当前使用版本。那么可以选择安装nvm。
 mac：
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash  linux:
 wget -qO- https://raw.</description>
+      
     </item>
     
   </channel>
